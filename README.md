@@ -63,5 +63,4 @@ All calls shall return the data in JSON format as shown:
 }
 ```
 ## UML Sequence Diagram
-Below is an example of a sequence of a call for the random Quote
-![Random Quote Generator UML](UML.PNG)
+See the UML.PNG file for the sequence diagram. 
