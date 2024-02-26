@@ -2,7 +2,7 @@
 Please follow the instructions below to run, and how to make calls for this random quote generator microservice
 
 ## Background
-This microservice implements a RESTful API to allow clients to send requests and receive responses in JSON format. The client can request and recieve randomly generated quotes. The random number is generated with a range that is based on the number of quotes in the JSON quote file.
+This microservice implements a python function to allow clients to send requests and receive responses in JSON format. The client can request and recieve randomly generated quotes. The random number is generated with a range that is based on the number of quotes in the JSON quote file.
 
 ## Prerequisites
 
