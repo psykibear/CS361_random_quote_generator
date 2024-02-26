@@ -1,41 +1,68 @@
-from flask import Flask, jsonify, send_file
+from flask import Flask, jsonify, request
 import json
 import random
+import os
 
 app = Flask(__name__)
+quotes_file_path = 'quoteList.json'
 
 def load_json_file(file_path):
+    """Loads and returns the content of the JSON file."""
+    if not os.path.exists(file_path):
+        return []
     try:
         with open(file_path, 'r') as file:
-            quote = json.load(file)
-            return quote
-    except FileNotFoundError:
-        return {"error": "File not found"}
-    except json.JSONDecodeError:
-        return {"error": "Invalid JSON format"}
+            return json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
 
-def get_random_quote(quote):
-    if isinstance(quote, list):
-        return random.choice(quote)
-    elif isinstance(quote, dict):
-        return random.choice(list(quote.items()))
-    return {"error": "Invalid quote format"}
-
-def create_new_json_file(file_path, quote):
+def save_json_file(file_path, data):
+    """Saves data to the JSON file."""
     with open(file_path, 'w') as file:
-        json.dump(quote, file, indent=4)
-        return file_path
+        json.dump(data, file, indent=4)
+
+@app.route('/quotes', methods=['GET', 'POST'])
+def manage_quotes():
+    quotes = load_json_file(quotes_file_path)
+    if request.method == 'GET':
+        if not quotes:
+            return jsonify({"error": "No quotes found"}), 404
+        return jsonify(quotes)
+    elif request.method == 'POST':
+        new_quote = request.json
+        quotes.append(new_quote)
+        save_json_file(quotes_file_path, quotes)
+        return jsonify(new_quote), 201
+
+@app.route('/quotes/<int:index>', methods=['GET', 'PUT', 'DELETE'])
+def handle_quote(index):
+    quotes = load_json_file(quotes_file_path)
+    if request.method == 'GET':
+        try:
+            return jsonify(quotes[index])
+        except IndexError:
+            return jsonify({"error": "Quote not found"}), 404
+    elif request.method == 'PUT':
+        try:
+            quotes[index] = request.json
+            save_json_file(quotes_file_path, quotes)
+            return jsonify(quotes[index])
+        except IndexError:
+            return jsonify({"error": "Quote not found"}), 404
+    elif request.method == 'DELETE':
+        try:
+            removed_quote = quotes.pop(index)
+            save_json_file(quotes_file_path, quotes)
+            return jsonify(removed_quote)
+        except IndexError:
+            return jsonify({"error": "Quote not found"}), 404
 
 @app.route('/random-quote', methods=['GET'])
-def random_entry():
-    input_file_path = 'quoteList.json'
-    output_file_path = 'randomQuote.json'
-
-    json_data = load_json_file(input_file_path)
-    random_quote = get_random_quote(json_data)
-    output_file_path = create_new_json_file(output_file_path, random_quote)
-
-    return send_file(output_file_path, mimetype='application/json')
+def random_quote():
+    quotes = load_json_file(quotes_file_path)
+    if not quotes:
+        return jsonify({"error": "No quotes found"}), 404
+    return jsonify(random.choice(quotes))
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
