@@ -14,7 +14,7 @@ def load_json_file(file_path):
     except json.JSONDecodeError:
         return {"error": "Invalid JSON format"}
 
-def get_random_entry(quote):
+def get_random_quote(quote):
     if isinstance(quote, list):
         return random.choice(quote)
     elif isinstance(quote, dict):
@@ -26,14 +26,14 @@ def create_new_json_file(file_path, quote):
         json.dump(quote, file, indent=4)
         return file_path
 
-@app.route('/random-entry', methods=['GET'])
+@app.route('/random-quote', methods=['GET'])
 def random_entry():
     input_file_path = 'quoteList.json'
     output_file_path = 'randomQuote.json'
 
     json_data = load_json_file(input_file_path)
-    random_entry = get_random_entry(json_data)
-    output_file_path = create_new_json_file(output_file_path, random_entry)
+    random_quote = get_random_quote(json_data)
+    output_file_path = create_new_json_file(output_file_path, random_quote)
 
     return send_file(output_file_path, mimetype='application/json')
 

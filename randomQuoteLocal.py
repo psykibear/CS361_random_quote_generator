@@ -23,8 +23,8 @@ def create_new_json_file(file_path, data):
         json.dump(data, file, indent=4)
 
 if __name__ == '__main__':
-    input_file_path = 'data.json'
-    output_file_path = 'random_data.json'
+    input_file_path = 'quoteList.json'
+    output_file_path = 'randomQuote.json'
 
     json_data = load_json_file(input_file_path)
     random_entry = get_random_entry(json_data)
