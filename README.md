@@ -1,4 +1,4 @@
-# Microservice for a Random Quote Generator using an internal number generator. 
+# Microservice for a Random Quote Generator.
 Please follow the instructions below to run, and how to make calls for this random quote generator microservice
 
 ## Background
@@ -6,23 +6,31 @@ This microservice implements a python function to allow clients to send requests
 
 ## Prerequisites
 
+Python3
 
 ## Installation
 
 Follow the instructions below for setting up the project using commands:
 
-1.
+1. npm install Python3
 
 ## Running the Sample Application
 Run this sample application to make sure you are setup correctly and to observe an example of how to make calls. 
+
+Make sure the microservice is running in the background
+python3 randomQuote.py
+
+In a new terminal window run the following:
+python3 randomQuoteApp.py
+The terminal then should print the quote in the terminal based on the sample app. 
 
 ### Response
 All calls shall return the data in JSON format as shown:
 
 ```json
-{
-    "randomQuote": <Quote>
-}
+[
+    <quote>
+]
 ```
 ## UML Sequence Diagram
 See the UML.PNG file for the sequence diagram.
