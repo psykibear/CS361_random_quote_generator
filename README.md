@@ -21,9 +21,11 @@ Open a new terminal window changing the directory to where the zip folder was do
 
 Start by running the the microservice in the background by running it in its own terminal window (or tab) using the following command:
 python3 randomQuote.py
+This microservice is how you REQUEST data. 
 
 Open a new terminal window (or tab) and run the following command:
 python3 randomQuoteApp.py
+The sample app is how you RECEIVE data. 
 
 This will run the sample app to then display the random quote that was sent to the JSON file through the microservice application running in the background.
 
