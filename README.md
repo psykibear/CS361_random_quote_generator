@@ -11,18 +11,21 @@ Python3
 ## Installation
 
 Follow the instructions below for setting up the project using commands:
-
-1. npm install Python3
+If you do not have python installed on your machine go to your terminal, 
+and install the appropriate Python as described using the following command in your terminal window: npm install Python3
 
 ## Running the Sample Application
 Run this sample application to make sure you are setup correctly and to observe an example of how to make calls. 
 
-Make sure the microservice is running in the background
+Open a new terminal window changing the directory to where the zip folder was downloaded and extracted. 
+
+Start by running the the microservice in the background by running it in its own terminal window (or tab) using the following command:
 python3 randomQuote.py
 
-In a new terminal window run the following:
+Open a new terminal window (or tab) and run the following command:
 python3 randomQuoteApp.py
-The terminal then should print the quote in the terminal based on the sample app. 
+
+This will run the sample app to then display the random quote that was sent to the JSON file through the microservice application running in the background.
 
 ### Response
 All calls shall return the data in JSON format as shown:
