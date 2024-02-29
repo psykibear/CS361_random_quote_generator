@@ -33,9 +33,11 @@ This will run the sample app to then display the random quote that was sent to t
 All calls shall return the data in JSON format as shown:
 
 ```json
-[
-    <quote>
-]
+{
+    [
+    "quote":<randomQuote>
+    ]
+}
 ```
 ## UML Sequence Diagram
 See the UML.PNG file for the sequence diagram.
