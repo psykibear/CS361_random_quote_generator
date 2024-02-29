@@ -34,9 +34,9 @@ All calls shall return the data in JSON format as shown:
 
 ```json
 {
-    [
+
     "quote":<randomQuote>
-    ]
+
 }
 ```
 ## UML Sequence Diagram
