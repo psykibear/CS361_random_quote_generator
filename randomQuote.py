@@ -4,7 +4,7 @@ import json
 import os
 
 while True:
-    time.sleep(1)
+    time.sleep(5)
     # Verify that the JSON file exists
     if os.path.exists("quoteList.json"):
         try:
